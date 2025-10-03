@@ -625,7 +625,7 @@ async function buildNarrativeSummarySheet(wb, equipMap, allIdlers) {
   ws.mergeCells(`I${currentRow}:S${currentRow}`);
   ws.getCell(`I${currentRow}`).value = shiftInfo;
   ws.getCell(`I${currentRow}`).font = { bold: true, size: 11, color: { argb: 'FF000000' }, name: 'Tahoma' };
-  ws.getCell(`I${currentRow}`).alignment = { vertical: 'middle', horizontal: 'Left' };
+  ws.getCell(`I${currentRow}`).alignment = { vertical: 'middle', horizontal: 'left' };
   
   currentRow++;
   
@@ -695,7 +695,7 @@ async function buildNarrativeSummarySheet(wb, equipMap, allIdlers) {
       // اضافه کردن نام تجهیز
       ws.mergeCells(`A${currentRow}:T${currentRow}`);
       ws.getCell(`A${currentRow}`).value = equipment;
-      ws.getCell(`A${currentRow}`).font = { bold: true, size: 12, color: { argb: 'FF000000' }, name: 'Calibri' };
+      ws.getCell(`A${currentRow}`).font = { bold: true, size: 16, color: { argb: 'FF000000' }, name: 'Calibri' };
       ws.getCell(`A${currentRow}`).alignment = { vertical: 'middle', horizontal: 'right', wrapText: true };
       ws.getCell(`A${currentRow}`).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE6F3FF' } };
       
@@ -1762,4 +1762,5 @@ async function buildVibrationSheet(wb, allVibrationData) {
 </body>
 
 </html>
+
 
