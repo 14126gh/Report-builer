@@ -1042,7 +1042,7 @@ for (let rowNumber = 6; rowNumber <= currentRow; rowNumber++) {
   // برای سطرهای عنوان تجهیزات (که در کل عرض مرج شده‌اند) ارتفاع بیشتری در نظر بگیر
   const equipmentCell = ws.getCell(`A${rowNumber}`);
   if (equipmentCell.value && equipmentCell.isMerged) {
-    row.height = Math.max(row.height, 28);
+    row.height = Math.max(row.height, 20);
   }
   
   // اطمینان از فعال بودن wrapText برای تمام سلولهای این سطر
@@ -1826,6 +1826,7 @@ async function buildVibrationSheet(wb, allVibrationData) {
 </body>
 
 </html>
+
 
 
 
