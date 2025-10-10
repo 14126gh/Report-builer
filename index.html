@@ -1027,13 +1027,13 @@ for (let rowNumber = 6; rowNumber <= currentRow; rowNumber++) {
   }
   
   // تنظیم ارتفاع بر اساس طول متن توضیحات
-  if (noteText.length > 200) {
+  if (noteText.length > 260) {
     row.height = 80; // متن بسیار طولانی
-  } else if (noteText.length > 100) {
+  } else if (noteText.length > 195) {
     row.height = 60; // متن طولانی
-  } else if (noteText.length > 50) {
-    row.height = 40; // متن متوسط
-  } else if (noteText.length > 20) {
+  } else if (noteText.length > 130) {
+    row.height = 45; // متن متوسط
+  } else if (noteText.length > 65) {
     row.height = 30; // متن کوتاه
   } else {
     row.height = 20; // متن بسیار کوتاه یا خالی
@@ -1826,5 +1826,6 @@ async function buildVibrationSheet(wb, allVibrationData) {
 </body>
 
 </html>
+
 
 
