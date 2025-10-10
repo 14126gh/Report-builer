@@ -1201,6 +1201,28 @@ async function buildIdlerSheet(wb, allIdlers) {
   appendLog('شیت لیست آیدلرها ساخته شد', false, true);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ===== ساخت شیت ارتعاش‌سنجی =====
 async function buildVibrationSheet(wb, allVibrationData) {
   if (allVibrationData.length === 0) {
@@ -1288,25 +1310,53 @@ async function buildVibrationSheet(wb, allVibrationData) {
       { name: 'گیربکس', data: data.gearbox }
     ];
     
-    const positions = ['لوز', 'فیکس'];
-    
     for (const comp of components) {
       if (comp.data) {
-        for (const position of positions) {
-          // فرمت کردن اعداد به دو رقم اعشار
-          const horizontal = formatNumber(comp.data.horizontal);
-          const vertical = formatNumber(comp.data.vertical);
-          const axial = formatNumber(comp.data.axial);
-          const temperature = formatNumber(comp.data.temperature);
-          
+        // پردازش بخش lose (لوز)
+        if (comp.data.lose) {
+          const loseData = comp.data.lose;
           const dataRow = [
             equipment,
             comp.name,
-            position,
-            horizontal,
-            vertical,
-            axial,
-            temperature
+            'لوز',
+            formatNumber(loseData.horizontal),
+            formatNumber(loseData.vertical),
+            formatNumber(loseData.axial),
+            formatNumber(comp.data.temperature)
+          ];
+          
+          ws.addRow(dataRow);
+          
+          // استایل ردیف
+          const rowObj = ws.getRow(rowIndex);
+          rowObj.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+          rowObj.font = { size: 10, name: 'Tahoma' };
+          
+          // اضافه کردن border
+          addBorderToRange(ws, rowIndex, rowIndex, 1, headers.length);
+          
+          // رنگ‌آمیزی متناوب
+          if (rowIndex % 2 === 0) {
+            for (let col = 1; col <= headers.length; col++) {
+              const cell = ws.getCell(rowIndex, col);
+              cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF9F9F9' } };
+            }
+          }
+          
+          rowIndex++;
+        }
+        
+        // پردازش بخش fixe (فیکس)
+        if (comp.data.fixe) {
+          const fixeData = comp.data.fixe;
+          const dataRow = [
+            equipment,
+            comp.name,
+            'فیکس',
+            formatNumber(fixeData.horizontal),
+            formatNumber(fixeData.vertical),
+            formatNumber(fixeData.axial),
+            formatNumber(comp.data.temperature)
           ];
           
           ws.addRow(dataRow);
@@ -1367,6 +1417,20 @@ async function buildVibrationSheet(wb, allVibrationData) {
   
   appendLog('شیت ارتعاش‌سنجی ساخته شد', false, true);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // ===== ساخت شیت تجهیزات =====
     async function buildEquipmentSheets(wb, equipMap) {
       const usedNames = new Set();
